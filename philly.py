@@ -32,10 +32,11 @@ people_exclude = {
 }
 
 for person in people_paid:
-	need_to_pay = sum(divided_amounts) - (people_paid[person] + people_exclude[person])
 	if (person in ['robin', 'jack']): continue
+	need_to_pay = sum(divided_amounts) - (people_paid[person] + people_exclude[person])
 	print('{} needs to pay robin {}'.format(person, str(need_to_pay)))
 
 jack_owed = (people_paid['jack'] + people_exclude['jack']) - sum(divided_amounts)
 print('robin needs to pay jack {}'.format(str(jack_owed)))
+print(total + jack_owed)
 
