@@ -1,5 +1,18 @@
 import math
 
+def inverse_captcha(num):
+	arr = [int(x) for x in str(num)]
+	digit_count = len(arr)
+	return sum(arr[n] if arr[n] == arr[n + 1 if n < (digit_count - 1) else 0] else 0 for n in range(digit_count))
+# print(inverse_captcha('91212129'))
+
+def inverse_captcha_halfway(num):
+	arr = [int(x) for x in str(num)]
+	digit_count = len(arr)
+	halfway = digit_count / 2
+	return sum(arr[n] if arr[n] == arr[n % halfway if n >= halfway else n + halfway] else 0 for n in range(digit_count))
+# print(inverse_captcha_halfway(123123))
+
 def spiral_memory(num):
 	if num < 2:
 		return 0
@@ -11,6 +24,5 @@ def spiral_memory(num):
  	row_distnce = abs(dist - ring_dist)
 	steps = row_distnce + ring_dist
 	return steps
-
-print(spiral_memory(57))
+# print(spiral_memory(57))
 
