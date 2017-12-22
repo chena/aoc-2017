@@ -1,1 +1,1 @@
-🎄 http://adventofcode.com/ 2017🎄
+🎄 [AoC 2017](http://adventofcode.com/)🎄
