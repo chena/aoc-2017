@@ -4,6 +4,8 @@ def register():
   with open('register.txt') as f:
     instructions = f.readlines()
   registers = defaultdict(int)
+  # all registers start out zero
+  highest = 0
   for line in instructions:
     parts = line.split('if')
     # parse condition
@@ -18,10 +20,17 @@ def register():
       dec = inst.split('dec')
       if (len(dec) > 1):
         reg = dec[0].strip()
-        registers[reg] = registers[reg] - int(dec[1])
+        result = registers[reg] - int(dec[1])
       else:
         inc = inst.split('inc')
         reg = inc[0].strip()
-        registers[reg] = registers[reg] + int(inc[1])
-  return max(registers.values())
+        result = registers[reg] + int(inc[1])
+      registers[reg] = result
+      if (result > highest):
+        highest = result
+  # part 1
+  # return max(registers.values())
+  # part 2
+  return highest
 print(register())
+
