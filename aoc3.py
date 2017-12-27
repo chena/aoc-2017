@@ -32,5 +32,52 @@ def register():
   # return max(registers.values())
   # part 2
   return highest
-print(register())
+# print(register())
 
+def stream_score(streams):
+  scores = []
+  index = 0
+  groups = list(streams)
+  while groups:
+    if groups[index] == '{':
+      scores.append(index + 1)
+      index += 1
+    else: # closing
+      groups.pop(index)
+      groups.pop(index - 1)
+      index -= 1
+  return sum(scores)
+
+def stream_processing(content=None):
+  if not content:
+    with open('stream.txt') as f:
+      content = f.readline().strip()
+  ignore_next = '!'
+  garbage_open = '<'
+  garbage_close = '>'
+  group_open = '{'
+  group_close = '}'
+  score = 0
+  garbage_mode = False
+  scores_stack = {}
+  garbage_stack = {}
+  skip = False
+  cleaned = ''
+  for c in content:
+    if skip:
+      skip = False
+    elif c == ignore_next:
+      skip = True
+    elif c == garbage_close:
+      garbage_mode = False
+    elif garbage_mode:
+      continue
+    elif c == garbage_open:
+      garbage_mode = True
+    elif c in [group_open, group_close]:
+      cleaned += c
+  return cleaned
+
+# streams = stream_processing('{{<!!>},{<!!>},{<!!>},{<!!>}}')
+# print(streams)
+print(stream_score(stream_processing()))
