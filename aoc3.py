@@ -63,6 +63,8 @@ def stream_processing(content=None):
   garbage_stack = {}
   skip = False
   cleaned = ''
+  garbage_count = 0
+  
   for c in content:
     if skip:
       skip = False
@@ -71,6 +73,7 @@ def stream_processing(content=None):
     elif c == garbage_close:
       garbage_mode = False
     elif garbage_mode:
+      garbage_count += 1
       continue
     elif c == garbage_open:
       garbage_mode = True
@@ -80,4 +83,5 @@ def stream_processing(content=None):
 
 # streams = stream_processing('{{<!!>},{<!!>},{<!!>},{<!!>}}')
 # print(streams)
-print(stream_score(stream_processing()))
+# print(stream_score(stream_processing()))
+print(stream_processing())
