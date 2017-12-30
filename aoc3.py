@@ -84,4 +84,41 @@ def stream_processing(content=None):
 # streams = stream_processing('{{<!!>},{<!!>},{<!!>},{<!!>}}')
 # print(streams)
 # print(stream_score(stream_processing()))
-print(stream_processing())
+# print(stream_processing())
+
+def __reverse__(lst, start_index, end_index):
+  size = len(lst)
+  if (start_index == end_index):
+    return lst
+  if (start_index < end_index):
+    swap_count = (end_index - start_index + 1) / 2
+  else:
+    swap_count = (size - start_index + end_index + 1) / 2
+  for n in range(swap_count):
+    temp = lst[start_index]
+    lst[start_index] = lst[end_index]
+    lst[end_index] = temp
+    start_index = (start_index + 1) % size
+    end_index = (end_index - 1) % size
+
+# lst = [0, 1, 2, 3, 4, 5]
+# __reverse__(lst, 4, 1)
+# print(lst)
+
+# input 76,1,88,148,166,217,130,0,128,254,16,2,130,71,255,229
+def knot_hash(lengths=[3, 1, 4, 0, 5], size=6):
+  numbers = range(size)
+  index = 0
+  skip_size = 0
+  for n in lengths:
+    end_index = (index + n) % size
+    if n > 0:
+      end_index -= 1
+      __reverse__(numbers, index, end_index)
+    index = (end_index + (0 if n < 1 else 1) + skip_size) % size
+    skip_size += 1
+  return numbers[0] * numbers[1]
+# print(knot_hash())
+print(knot_hash([76,1,88,148,166,217,130,0,128,254,16,2,130,71,255,229], 256))
+
+
