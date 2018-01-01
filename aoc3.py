@@ -132,7 +132,7 @@ def kont_hash_ascii(lengths='3,4,1,5', size=5):
     end = start + 16 
     r = reduce(lambda x, y: x ^ y, numbers[start:end])
     h = hex(r)[2:]
-    result.append(('0' if len(h) < 1 else '') + h)
+    result.append(('0' if len(h) < 2 else '') + h)
   return ''.join(result)
 print(kont_hash_ascii('76,1,88,148,166,217,130,0,128,254,16,2,130,71,255,229', 256))
 
