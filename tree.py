@@ -11,6 +11,24 @@ class Node:
     self.right = None
 
 # returns true if the given tree is a BST
+# first approach = first do an inroder traversal of the tree
+def is_bst_inorder(node):
+  tree = __inorder__(node)
+  for n in range(len(tree) - 1):
+    if tree[n].item > tree[n + 1].item:
+      return False
+  return True
+
+def __inorder__(n, nodes = []):
+  if n.left:
+    __inorder__(n.left, nodes)
+  nodes.append(n)
+  if n.right:
+    __inorder__(n.right, nodes)
+  return nodes
+
+# second approach = keeping track of min and max 
+# and check left and right subtress recursively
 def is_bst(node):
   return __is_bst__(node, MIN_INT, MAX_INT)
 
@@ -29,4 +47,5 @@ root.right = Node(5)
 root.left.left = Node(1)
 root.left.right = Node(3)
 
-print(is_bst(root))
+# print(is_bst(root))
+print(is_bst_inorder(root))
