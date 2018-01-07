@@ -42,26 +42,44 @@ def hex_ed(paths=[]):
 # print(hex_ed(['se', 'sw', 'se', 'sw', 'sw']))
 # print(hex_ed())
 
-def __check_connections__(program_id, links, group):
-  for c in links[program_id]:
+def __check_connections__(program_id, connections, group):
+  for c in connections[program_id]:
     if c in group:
       continue
     group.add(c)
-    __check_connections__(c, links, group)
+    __check_connections__(c, connections, group)
 
-def digital_plumber():
+def __get_connetions__():
   with open('input/programs.txt') as f:
     content = f.readlines()
-  links = {}
+  connections = {}
   programs = [p.strip() for p in content]
   arrow = '<->'
   for p in programs:
     parts = p.split(arrow)
     program = int(parts[0].strip())
-    links[program] = [int(l) for l in parts[1].strip().split(', ')]
+    connections[program] = [int(l) for l in parts[1].strip().split(', ')]
+  return connections
+
+def digital_plumber_zero_group():
+  connections = __get_connetions__()
   # traverse through each program and check its connections
   # keep track of the programs with a set
   zero_group = {0}
-  __check_connections__(0, links, zero_group)
+  __check_connections__(0, connections, zero_group)
   return len(zero_group)
-print(digital_plumber())
+# print(digital_plumber_zero_group())
+
+def digital_plumber_group_count():
+  connections = __get_connetions__()
+  # traverse through each program mark the group it belongs to
+  groupings = {}
+  for p in connections:
+    if p in groupings:
+      continue
+    group = {p}
+    __check_connections__(p, connections, group)
+    for member in group:
+      groupings[member] = p
+  return len(set(groupings.values()))
+print(digital_plumber_group_count())
