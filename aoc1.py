@@ -34,7 +34,7 @@ def corruption_checksum(rows):
 		diffs.append(max_val - min_val)
 	return sum(diffs)
 # print(corruption_checksum([[5, 1, 9, 5],[7, 5, 3],[2, 4, 6, 8]]))
-# print(corruption_checksum(__parse_checksum_input__('checksum_input.txt')))
+# print(corruption_checksum(__parse_checksum_input__('input/checksum_input.txt')))
 
 def corruption_checksum_divisible(rows):
 	divs = []
@@ -50,7 +50,7 @@ def corruption_checksum_divisible(rows):
 				break;
 	return sum(divs);
 # print(corruption_checksum_divisible([[5, 9, 2, 8],[9, 4, 7, 3],[3, 8, 6, 5]]))
-# print(corruption_checksum_divisible(__parse_checksum_input__('checksum_input.txt')))
+# print(corruption_checksum_divisible(__parse_checksum_input__('input/checksum_input.txt')))
 
 def spiral_memory(num):
 	if num < 2:
@@ -88,7 +88,7 @@ def valid_passphrase(passphrases):
 		print(m)
 	return valid_count
 # print(valid_passphrase([['abcde', 'xyz', 'ecdab']]))
-# print(valid_passphrase(__parse_passphrase_input__('passphrases.txt')))
+# print(valid_passphrase(__parse_passphrase_input__('input/passphrases.txt')))
 
 def __parse_maze_input__(filename):
 	with open(filename) as f:
@@ -108,5 +108,5 @@ def maze_of_twisty(maze):
 		steps += 1
 	return steps
 # print(maze_of_twisty([0, 3, 0, 1, -3]))
-print(maze_of_twisty(__parse_maze_input__('maze.txt')))
+print(maze_of_twisty(__parse_maze_input__('input/maze.txt')))
 

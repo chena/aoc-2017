@@ -19,7 +19,7 @@ def memory_reallocation(blocks):
     __distribute_blocks__(blocks)
   return seen
 # print(len(memory_reallocation([0, 2, 7, 0])))
-# print(len(memory_reallocation(__parse_blocks_input('blocks.txt'))))
+# print(len(memory_reallocation(__parse_blocks_input('input/blocks.txt'))))
 
 def memory_reallocation_again(blocks):
   seen = []
@@ -33,7 +33,7 @@ def memory_reallocation_again(blocks):
     __distribute_blocks__(blocks)
   return steps;
 # print(memory_reallocation_again([0, 2, 7, 0]))
-# print(memory_reallocation_again(__parse_blocks_input('blocks.txt')))
+# print(memory_reallocation_again(__parse_blocks_input('input/blocks.txt')))
 
 def recursive_circus():
   children = []
@@ -112,7 +112,7 @@ def __wrong_subtree__(node):
       return  totals[t][0]
 
 def recursive_circus_weight():
-  with open('circus.txt') as f:
+  with open('input/circus.txt') as f:
     content = f.readlines()
   tree = __construct_tree__(content)  
   # find root of the tree

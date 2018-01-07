@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 def register():
-  with open('register.txt') as f:
+  with open('input/register.txt') as f:
     instructions = f.readlines()
   registers = defaultdict(int)
   # all registers start out zero
@@ -50,7 +50,7 @@ def stream_score(streams):
 
 def stream_processing(content=None):
   if not content:
-    with open('stream.txt') as f:
+    with open('input/stream.txt') as f:
       content = f.readline().strip()
   ignore_next = '!'
   garbage_open = '<'
