@@ -20,6 +20,11 @@ class Coordinate:
 	def __str__(self):
 		return '({}, {})'.format(self.x, self.y)
 
+def __distance__(location):
+	x_distance = abs(location.x)
+	y_distance = abs(location.y)
+	return x_distance if x_distance > y_distance else (x_distance + y_distance) / 2
+
 def hex_ed(paths=[]):
 	if not paths:
 		with open('hex_ed.txt') as f:
@@ -27,13 +32,12 @@ def hex_ed(paths=[]):
 		paths = content.split(',')
 	# start moving
 	location = Coordinate(0, 0)
+	steps = []
 	for direction in paths:
 		location.move(direction)
+		steps.append(__distance__(location))
 	print('final location is: {}'.format(location))
-	# calculate shortest distance
-	x_distance = abs(location.x)
-	y_distance = abs(location.y)
-	return x_distance if x_distance > y_distance else (x_distance + y_distance) / 2
+	return max(steps)
 
-print(hex_ed(['se', 'sw', 'se', 'sw', 'sw']))
-# print(hex_ed())
+# print(hex_ed(['se', 'sw', 'se', 'sw', 'sw']))
+print(hex_ed())
