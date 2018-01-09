@@ -10,6 +10,9 @@ class Node:
     self.left = None
     self.right = None
 
+  def __str__(self):
+    return str(self.item)
+
 # returns true if the given tree is a BST
 # first approach = first do an inroder traversal of the tree
 def is_bst_inorder(node):
@@ -41,6 +44,25 @@ def __is_bst__(node, min, max):
 
   return __is_bst__(node.left, min, node.item - 1) and __is_bst__(node.right, node.item + 1, max)
 
+# invert a binary tree
+def invert_tree(node):
+  if node:
+    left_subtree = invert_tree(node.right)
+    right_subtree = invert_tree(node.left)
+    # swap
+    node.left = left_subtree
+    node.right = right_subtree
+  return node
+
+def print_df(root):
+  if root:
+    print(root)
+    print_df(root.left)
+    print_df(root.right)
+
+def print_inorder(root):
+  print([n.item for n in __inorder__(root)])
+
 root = Node(4)
 root.left = Node(2)
 root.right = Node(5)
@@ -48,4 +70,7 @@ root.left.left = Node(1)
 root.left.right = Node(3)
 
 # print(is_bst(root))
-print(is_bst_inorder(root))
+# print(is_bst_inorder(root))
+# print_df(root)
+
+print_inorder(invert_tree(root))
