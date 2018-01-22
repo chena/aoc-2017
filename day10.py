@@ -21,7 +21,7 @@ def __reverse__(lst, start_index, end_index):
 # print(lst)
 
 # input 76,1,88,148,166,217,130,0,128,254,16,2,130,71,255,229
-def knot_hash(lengths=[3, 4, 1, 5], size=5, rounds=1):
+def knot_hash_round(lengths=[3, 4, 1, 5], size=5, rounds=1):
   numbers = range(size)
   index = 0
   skip_size = 0
@@ -37,10 +37,10 @@ def knot_hash(lengths=[3, 4, 1, 5], size=5, rounds=1):
 # print(knot_hash())
 # print(knot_hash([76,1,88,148,166,217,130,0,128,254,16,2,130,71,255,229], 256))
 
-def kont_hash_ascii(lengths='3,4,1,5', size=5):
+def kont_hash(lengths='3,4,1,5', size=5):
   lengths = [ord(c) for c in lengths]
   lengths.extend([17, 31, 73, 47, 23])
-  numbers = knot_hash(lengths, size, 64)
+  numbers = knot_hash_round(lengths, size, 64)
   result = []
   for n in range(16):
     start = n * 16
@@ -49,13 +49,8 @@ def kont_hash_ascii(lengths='3,4,1,5', size=5):
     h = hex(r)[2:]
     result.append(('0' if len(h) < 2 else '') + h)
   return ''.join(result)
-# print(kont_hash_ascii('76,1,88,148,166,217,130,0,128,254,16,2,130,71,255,229', 256))
+# print(kont_hash('76,1,88,148,166,217,130,0,128,254,16,2,130,71,255,229', 256))
 
-def to_knot_hash():
-  with open('output/disk_defrag.txt') as f:
-    rows = [r.strip() for r in f.readlines() if r]
-  out = open('output/know_hashes.txt', 'w')
-  for r in rows:
-    out.write(kont_hash_ascii(r, 256) + '\n')
-to_knot_hash()
+def to_knot_hash(lengths, size=256):
+  return kont_hash(lengths, size)
 
