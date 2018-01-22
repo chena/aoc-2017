@@ -49,4 +49,13 @@ def kont_hash_ascii(lengths='3,4,1,5', size=5):
     h = hex(r)[2:]
     result.append(('0' if len(h) < 2 else '') + h)
   return ''.join(result)
-print(kont_hash_ascii('76,1,88,148,166,217,130,0,128,254,16,2,130,71,255,229', 256))
+# print(kont_hash_ascii('76,1,88,148,166,217,130,0,128,254,16,2,130,71,255,229', 256))
+
+def to_knot_hash():
+  with open('output/disk_defrag.txt') as f:
+    rows = [r.strip() for r in f.readlines() if r]
+  out = open('output/know_hashes.txt', 'w')
+  for r in rows:
+    out.write(kont_hash_ascii(r, 256) + '\n')
+to_knot_hash()
+
