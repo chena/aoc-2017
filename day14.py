@@ -12,4 +12,15 @@ def square_count():
     total += sum(binary)
   print(total)
 
-square_count()
+def region_coount():
+  used_squares = []
+  # generate matrix
+  for h in knot_hashes():
+    binary = [int(d) for d in bin(int(h, 16))[2:]]
+    used_square = [i for i in range(len(binary)) if binary[i] > 0]
+    used_squares.append(used_square)
+  # for i in range()
+
+
+region_coount()
+#square_count()
