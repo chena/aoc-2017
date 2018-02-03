@@ -18,11 +18,7 @@ After finishing their dance, the programs end up in order baedc.
 part 1:
 In what order are the programs standing after their dance?
 """
-def dance(count=16, moves=[]):
-  programs = list(string.ascii_lowercase[:count])
-  if not moves:
-    with open('input/dance.txt') as f:
-      moves = f.readline().strip().split(',')
+def dance(moves, programs):
   for m in moves:
     d = m[0]
     if d == 's':
@@ -44,12 +40,26 @@ def dance(count=16, moves=[]):
       pos2 = programs.index(pr2)
       programs[pos1] = pr2
       programs[pos2] = pr1
-  return ''.join(programs)
-
-# print(dance(5, ['s1','x3/4','pe/b']))
-print(dance())
+  return programs
 
 """
 part 2:
 In what order are the programs standing after their billion (1000000000) dances?
 """
+def dance_repeat(count=16, moves=[], repeat=1000000000):
+  programs = list(string.ascii_lowercase[:count])
+  if not moves:
+    with open('input/dance.txt') as f:
+      moves = f.readline().strip().split(',')
+  seen_moves = []
+  for i in xrange(repeat):
+    m = ''.join(programs)
+    if m in seen_moves:
+      print('seen {} after {} iterations'.format(m, i))
+      return ''.join(seen_moves[repeat % i])
+    seen_moves.append(m)
+    programs = dance(moves, programs)
+  return ''.join(programs)
+
+# print(dance_repeat(5, ['s1','x3/4','pe/b'], 1))
+print(dance_repeat())
