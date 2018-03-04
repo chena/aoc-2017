@@ -2,7 +2,7 @@
 http://adventofcode.com/2017/day/21
 """
 START = ['.#.', '..#', '###']
-RUNS = 5
+RUNS = 18
 
 def __flip__(rule):
   flips = []
