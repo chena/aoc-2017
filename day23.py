@@ -10,6 +10,11 @@ how many times is the mul instruction invoked?
 """
 registers = defaultdict(int)
 
+"""
+- register starts at 1
+"""
+registers['a'] = 1
+
 def __get__(value):
   try:
     return int(value)
@@ -41,6 +46,16 @@ def coprocessor():
     index += 1
   return mcount
 
-print(coprocessor())
+def debug_h():
+  h = 0
+  for i in xrange(107900, 124900 + 1, 17):
+    for j in xrange(2, i):
+        if i % j == 0:
+            h += 1
+            break
+  return h
+
+# print(coprocessor())
+print(debug_h())
 
 
