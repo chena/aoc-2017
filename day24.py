@@ -10,9 +10,13 @@ http://adventofcode.com/2017/day/24
 part 1:
 What is the strength of the strongest bridge 
 you can make with the components you have available?
+
+part 2:
+What is the strength of the longest bridge you can make?
 """
 mapping = defaultdict(list)
 sums = []
+briges_strength = defaultdict(list) # mapped by length to its strength
 
 class Node:
   def __init__(self, value):
@@ -38,7 +42,8 @@ def __traverse__(node, current_path, current_port):
   key = f if f != current_port else s
   if __all_used__(key, current_path):
     # print 'current path: ', [n.value for n in current_path]
-    sums.append(sum([sum(n.value) for n in current_path]))
+    s = sum([sum(n.value) for n in current_path])
+    briges_strength[len(current_path)].append(s)
     return node
   for c in mapping[key]:
     if not c in current_path:
@@ -68,23 +73,9 @@ def bridges():
     mapping[left].append(node)
     if (left != right):
       mapping[right].append(node)
-  # starts at 0
-  # zero_node1, zero_node2 = mapping[0]
-  # tree = __traverse__(zero_node1, [], 0)
-  # tree2 = __traverse__(zero_node2, [], 0)
   tree = __traverse__(mapping[0][0], [], 0)
-  # __print_mapping__()
-  # __print_tree__(tree)
-  # __print_tree__(tree2)
-  # print sums
-  return max(sums)
+  # return max([max(b) for b in briges_strength.values()]) # part1
+  return max(briges_strength[max(briges_strength.keys())]) # part 2
 
 print(bridges())
-# n = Node([0, 0])
-# n1 = Node([1, 1])
-# n2 = Node([2, 2])
-# n3 = Node([3, 3])
-# n.children = [n1, n2]
-# n1.children = [n3, Node([4, 4])]
-# __print_tree__(n)
 
